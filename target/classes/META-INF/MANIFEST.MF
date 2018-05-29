@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1527606560455
+Build-Jdk: 1.8.0_131
+Built-By: dhumphri
+Bundle-Description: Camel route using ActiveMQ in Karaf container
+Bundle-ManifestVersion: 2
+Bundle-Name: Fabric8 :: Quickstarts :: Karaf :: Camel and ActiveMQ
+Bundle-SymbolicName: com.demo.karafcameldemo
+Bundle-Version: 0.0.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.demo.karafcameldemo;uses:="org.apache.camel,org.apac
+ he.camel.spi";version="0.0.1.SNAPSHOT"
+Import-Package: io.fabric8.mq.camel,io.fabric8.mq.core,org.apache.active
+ mq.camel.component,org.apache.activemq.pool,org.apache.camel;version="[
+ 2.15,3)",org.apache.camel.spi;version="[2.15,3)",org.osgi.service.bluep
+ rint;version="[1.0.0,2.0.0)"
+Tool: Bnd-1.50.0

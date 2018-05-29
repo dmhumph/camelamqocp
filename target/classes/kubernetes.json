@@ -1,0 +1,83 @@
+{
+  "apiVersion" : "v1",
+  "kind" : "Template",
+  "labels" : { },
+  "metadata" : {
+    "annotations" : {
+      "fabric8.karafcameldemo/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8/master/fabric8-maven-plugin/src/main/resources/icons/camel.svg",
+      "description" : "# Camel AMQ QuickStart\n\nThis example shows how to use Camel in a Karaf Container using Blueprint to connect to the A-MQ xPaaS message broker on OpenShift.\nThe Red Hat JBoss A-MQ xPaaS product should already be installed and running on your OpenShift installation - see the [documentation](https://docs.openshift.com/enterprise/3.1/using_images/xpaas_images/a_mq.html)\n\nThis example will connect to the A_MQ message broker and send messages to a queue TEST.FOO\n\n\n### Building\n\nThe example can be built with\n\n    mvn clean install\n\n\n### Running the example in fabric8\n\nIt is assumed that OpenShift platform is already running. If not you can find details how to [Install OpenShift at your site](https://docs.openshift.com/enterprise/3.1/install_config/install/index.html).\n\nThe example can be built and deployed using a single goal:\n\n    mvn -Pf8-deploy\n\nWhen the example runs in OpenShift, you can use the OpenShift client tool to inspect the status\n\nTo list all the running pods:\n\n    oc get pods\n\nThen find the name of the pod that runs this quickstart, and output the logs from the running pods with:\n\n    oc logs <name of pod>\n\nYou can also use the openshift [web console](https://docs.openshift.com/enterprise/3.1/getting_started/developers/developers_console.html#tutorial-video) to manage the\nrunning pods, and view logs and much more.\n\n\n### Running the example using OpenShift S2I template\n\nThe example can also be built and run using the included S2I template quickstart-template.json.\n\nThe application can be run directly by first editing the template file and populating S2I build parameters, including the required parameter GIT_REPO and then executing the command:\n\n    oc new-app -f quickstart-template.json\n\nAlternatively the template file can be used to create an OpenShift application template by executing the command:\n\n    oc create -f quickstart-template.json\n\n\n### More details\n\nYou can find more details about running this [quickstart](http://fabric8.io/guide/quickstarts/running.html) on the website. This also includes instructions how to change the Docker image user and registry.\n\n\n",
+      "fabric8.karafcameldemo/summary" : "Camel route using ActiveMQ in Karaf container"
+    },
+    "labels" : { },
+    "name" : "karafcameldemo"
+  },
+  "objects" : [ {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "container" : "karaf",
+        "component" : "karafcameldemo",
+        "provider" : "fabric8",
+        "project" : "karafcameldemo",
+        "version" : "0.0.1-SNAPSHOT",
+        "group" : "quickstarts"
+      },
+      "name" : "karafcameldemo"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "container" : "karaf",
+        "component" : "karafcameldemo",
+        "provider" : "fabric8",
+        "project" : "karafcameldemo",
+        "version" : "0.0.1-SNAPSHOT",
+        "group" : "quickstarts"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "container" : "karaf",
+            "component" : "karafcameldemo",
+            "provider" : "fabric8",
+            "project" : "karafcameldemo",
+            "version" : "0.0.1-SNAPSHOT",
+            "group" : "quickstarts"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "fabric8/karafcameldemo:0.0.1-SNAPSHOT",
+            "name" : "karafcameldemo",
+            "ports" : [ {
+              "containerPort" : 8181,
+              "name" : "http"
+            }, {
+              "containerPort" : 8778,
+              "name" : "jolokia"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  } ],
+  "parameters" : [ ]
+}

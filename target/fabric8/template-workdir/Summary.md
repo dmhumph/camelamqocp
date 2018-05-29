@@ -1,0 +1,1 @@
+Camel route using ActiveMQ in Karaf container
